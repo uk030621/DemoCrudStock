@@ -184,7 +184,7 @@ export default function Home() {
     
     const handleClose = () => {
         // Redirect users to the desired page
-        window.location.href = 'https://crud-stock-lwj.vercel.app/';
+        window.location.href = 'https://demo-crud-stock.vercel.app/';
 
         // Close the current window after redirecting
         window.open('', '_self');
