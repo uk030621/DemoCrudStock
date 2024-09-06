@@ -34,7 +34,7 @@ export default function Home() {
 
     const fetchBaselineValue = async () => {
         try {
-            const response = await fetch('/api/settings');
+            const response = await fetch('/api/usbaseline');
             const data = await response.json();
             setBaselinePortfolioValue(data.baselinePortfolioValue);
         } catch (error) {
@@ -44,7 +44,7 @@ export default function Home() {
 
     const updateBaselineValue = async () => {
         try {
-            const response = await fetch('/api/settings', {
+            const response = await fetch('/api/usbaseline', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ baselinePortfolioValue: parseFloat(newBaselineValue) })
@@ -80,12 +80,12 @@ export default function Home() {
     const fetchData = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch('/api/stock');
+            const response = await fetch('/api/usstock');
             const data = await response.json();
 
             const updatedStocks = await Promise.all(
                 data.map(async (stock) => {
-                    const priceResponse = await fetch(`/api/stock?symbol=${stock.symbol}`);
+                    const priceResponse = await fetch(`/api/usstock?symbol=${stock.symbol}`);
                     const priceData = await priceResponse.json();
 
                     const pricePerShare = parseFloat(priceData.pricePerShare);
@@ -131,7 +131,7 @@ export default function Home() {
     const addOrUpdateStock = async () => {
         try {
             const method = isEditing ? 'PUT' : 'POST';
-            const endpoint = isEditing ? `/api/stock?symbol=${editingSymbol}` : '/api/stock';
+            const endpoint = isEditing ? `/api/usstock?symbol=${editingSymbol}` : '/api/stock';
 
             const response = await fetch(endpoint, {
                 method: method,
@@ -154,7 +154,7 @@ export default function Home() {
 
     const deleteStock = async (symbol) => {
         try {
-            const response = await fetch('/api/stock', {
+            const response = await fetch('/api/usstock', {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ symbol })
@@ -198,12 +198,12 @@ export default function Home() {
 
             <button className='input-stock-button' onClick={updateBaselineValue}>Submit New Baseline</button>
 
-            {/*<button className='input-stock-button' onClick={handleClose}>Exit</button>*/}
+           {/*<button className='input-stock-button' onClick={handleClose}>Exit</button>*/}
             
             <h1 className='heading'>
-                UK<span>
+                US<span>
                 <Image className='uk-pic'
-                    src="/UKFlag.jpg" 
+                    src="/USFLAG.jpg" 
                     alt="Portfolio Image" 
                     width={50}  // Adjust the width
                     height={50} // Adjust the height
@@ -211,8 +211,6 @@ export default function Home() {
                 />
                 </span> Stock Portfolio  
             </h1>
-
-
 
             <h2 className="sub-heading" style={{ marginTop: '10px' }}>Total Value: <span className='total-value'>£{totalPortfolioValue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</span></h2>
             <h4 className='baseline-value'>Baseline Value: £{baselinePortfolioValue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</h4>
@@ -240,7 +238,8 @@ export default function Home() {
             {/*<a className='hyperlink1' href="https://uk.finance.yahoo.com/lookup" target="_blank" rel="noopener noreferrer" >Link - <span className='symbol-lookup'>symbol lookup</span> </a>*/}
             <Link className='stock-symbol-search' href = "/symbolsearch">Symbol Search</Link>
             <Link className='currency-link' href="/currency">Currency Converter</Link>
-            <Link className='usstock-link' href="/uscurrency">US Stocks</Link>
+            <Link className='usstock-link' href="/">UK Stocks</Link>
+
             {/* Add or Update Stock Form */}
             <div>
                 <input className='inputs'

@@ -1,8 +1,51 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
   color: black;
-  
+  background-color: azure ;
 }
+
+.currency-link{
+  text-decoration: none;
+  font-size: small;
+  margin-right: 20px;
+}
+
+.currency-link:hover{
+  color:black;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.currency-input{
+  padding: 7px 8px;
+  width: 120px;
+  border-radius: 5px;
+  border: 1px solid #ccc; /* Set a consistent border color */
+}
+
+.selector{
+  padding: 6px 8px;
+  margin-left: 4px;
+  border-radius: 5px;
+  border: 1px solid #ccc; /* Set a consistent border color */
+}
+
+.convert-button{
+  padding: 6px 8px;
+  margin-left: 4px;
+}
+
+
+.home-link{
+  text-decoration: none;
+}
+
+.home-link:hover{
+  color:black;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
 
 .hyperlink1{
   text-decoration: none;
@@ -21,6 +64,7 @@ body{
 .symbol-lookup{
   color:grey;
 }
+
 
 .statistics{
   color:grey;
@@ -54,7 +98,6 @@ button:hover{
   color:black;
   font-size: 1.7rem;
   font-weight: bolder;
-  margin-bottom: 3px;
 }
 
 .sub-heading{
@@ -123,6 +166,48 @@ button:hover{
 
 .baseline-value{
   color: gray;
-  margin-bottom: 0;
 }
 
+.usstock-link{
+  text-decoration: none;
+  font-size: small;
+}
+
+.usstock-link:hover{
+  color: black;
+  font-weight: bolder;
+}
+
+.ukstock-link{
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.ukstock-link:hover{
+  color: black;
+  font-weight: bolder;
+}
+
+.stock-symbol-search{
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: small;
+}
+
+.stock-symbol-search:hover{
+  color: black;
+  font-weight: bolder;
+}
+
+.uk-pic{
+  border-radius: 7px;
+}
+
+.selected-symbol{
+  margin-bottom: 10px;
+}
+
+.return-to-stock{
+  margin-right: 10px;
+  font-size: small;
+}
