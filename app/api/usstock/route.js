@@ -16,6 +16,22 @@ export async function GET(req) {
         const db = await connectToDatabase();
 
         if (symbol) {
+            // Special handling for FTSE^ index
+            if (symbol === 'FTSE^') {
+                const response = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/%5EFTSE`);
+                const data = await response.json();
+                const ftseValue = data.chart.result[0].meta.regularMarketPrice;
+
+                if (ftseValue !== undefined) {
+                    return NextResponse.json({ symbol: 'FTSE^', pricePerShare: ftseValue });
+                } else {
+                    return NextResponse.json({ error: 'Failed to fetch FTSE index value' }, { status: 500 });
+                }
+            }
+            
+            
+            
+            
             const stock = await db.collection('usstocks').findOne({ symbol });
 
             if (!stock) {

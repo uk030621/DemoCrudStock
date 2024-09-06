@@ -43,7 +43,16 @@ export default function StockSearchPage() {
 
   return (
     <div style={{ padding: '5px' }}>
-      <h1>Stock Symbol Lookup</h1>
+
+      <Image className='uk-pic'
+                    src="/search.jpg" 
+                    alt="Portfolio Image" 
+                    width={290}  // Adjust the width
+                    height={260} // Adjust the height
+                    style={{ marginLeft: '5px' }}  // Add margin for spacing
+                />
+
+      <h1 className='stock-label'>Stock Symbol Lookup</h1>
       <input
         type="text"
         placeholder="Enter stock name or symbol"
@@ -82,6 +91,7 @@ export default function StockSearchPage() {
         ref={inputRef}
         type="text"
         defaultValue={selectedStock}
+        readOnly
         style={{ marginRight: '10px', marginTop: '10px', padding:'8px' }}
       />
       <button 

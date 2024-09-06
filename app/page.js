@@ -6,6 +6,7 @@ import Image from 'next/image';
 export default function Home() {
     const [stocks, setStocks] = useState([]);
     const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
+    const [ftseValue, setFtseValue] = useState(null); // Initialize ftseValue using useState
     const [newStock, setNewStock] = useState({ symbol: '', sharesHeld: 0 });
     const [isEditing, setIsEditing] = useState(false);
     const [editingSymbol, setEditingSymbol] = useState('');
@@ -20,7 +21,26 @@ export default function Home() {
     useEffect(() => {
         fetchData();
         fetchBaselineValue();
+        fetchFtseValue(); // Fetch FTSE value
     }, []);
+
+
+
+
+     // Function to fetch FTSE index value
+     const fetchFtseValue = async () => {
+        try {
+            const response = await fetch('/api/stock?symbol=FTSE^');
+            const data = await response.json();
+            if (data.pricePerShare) {
+                setFtseValue(data.pricePerShare);
+            }
+        } catch (error) {
+            console.error('Error fetching FTSE index:', error);
+        }
+    };
+
+    // Other existing code...
 
     useEffect(() => {
         const absoluteDeviation = totalPortfolioValue - baselinePortfolioValue;
@@ -195,6 +215,15 @@ export default function Home() {
 
     return (
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
+
+        {/* FTSE Index Display */}
+        {ftseValue !== null && (
+            <h2 className="ftse-index" style={{ marginBottom: '20px', color:'grey' }}>
+                FTSE 100 Index: <span>{ftseValue.toLocaleString('en-GB')}</span>
+            </h2>
+        )}
+
+
 
             <button className='input-stock-button' onClick={updateBaselineValue}>Submit a baseline</button>
 

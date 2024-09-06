@@ -215,6 +215,9 @@ button:hover{
 
 .selected-symbol{
   margin-bottom: 10px;
+  background-color: grey;
+  border: none;
+  border-radius: 7px;
 }
 
 .return-to-stock{
@@ -222,3 +225,7 @@ button:hover{
   font-size: small;
 }
 
+.stock-label{
+  font-size: 1.6rem;
+  margin-top: 0;
+}
