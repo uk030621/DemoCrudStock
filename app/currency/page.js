@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
 
 export default function CurrencyConverter() {
   const [amount, setAmount] = useState('');
@@ -28,7 +29,18 @@ export default function CurrencyConverter() {
   return (
     <div style={{ textAlign: 'center', marginTop: '15px' }}>
       <Link className="home-link" href = "/">Home</Link>
-      <h1 className='currency-converter-heading'>Currency Converter</h1>
+      
+      <h1 className='currency-converter-heading'>convert
+        <span>
+        <Image className='uk-pic'
+                    src="/moneyexchange.jpg" 
+                    alt="Money Exchange Image" 
+                    width={100}  // Adjust the width
+                    height={100} // Adjust the height
+                    style={{ marginLeft: '5px' }}  // Add margin for spacing
+                />
+        </span> Currency</h1>
+
       <form onSubmit={handleConvert}>
         <input className='currency-input'
           type="number" 

@@ -1,13 +1,17 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
   color: black;
-  background-color: azure ;
+}
+
+.currency-converter-heading{
+  font-size: 1.3rem;
 }
 
 .currency-link{
   text-decoration: none;
   font-size: small;
   margin-right: 20px;
+  color:grey
 }
 
 .currency-link:hover{
@@ -38,12 +42,15 @@ body{
 
 .home-link{
   text-decoration: none;
+  color: grey;
+  margin-right: 10px;
 }
 
 .home-link:hover{
   color:black;
   font-weight: bolder;
   cursor: pointer;
+  font-size: large;
 }
 
 
@@ -58,7 +65,7 @@ body{
 .hyperlink1:hover{
   text-decoration: underline;
   font-weight: bolder;
-  color: blue;
+  color: black;
 }
 
 .symbol-lookup{
@@ -171,6 +178,7 @@ button:hover{
 .usstock-link{
   text-decoration: none;
   font-size: small;
+  color: grey;
 }
 
 .usstock-link:hover{
@@ -181,6 +189,7 @@ button:hover{
 .ukstock-link{
   margin-left: 10px;
   text-decoration: none;
+  color: grey;
 }
 
 .ukstock-link:hover{
@@ -192,6 +201,7 @@ button:hover{
   text-decoration: none;
   margin-right: 20px;
   font-size: small;
+  color:grey
 }
 
 .stock-symbol-search:hover{
@@ -211,3 +221,4 @@ button:hover{
   margin-right: 10px;
   font-size: small;
 }
+

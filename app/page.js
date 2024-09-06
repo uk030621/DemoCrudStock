@@ -196,7 +196,7 @@ export default function Home() {
     return (
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
 
-            <button className='input-stock-button' onClick={updateBaselineValue}>Submit New Baseline</button>
+            <button className='input-stock-button' onClick={updateBaselineValue}>Submit a baseline</button>
 
             {/*<button className='input-stock-button' onClick={handleClose}>Exit</button>*/}
             
@@ -220,7 +220,7 @@ export default function Home() {
             <input
                 className="inputs"
                 type="number"
-                placeholder="New Baseline Value"
+                placeholder="Enter Baseline Value"
                 value={newBaselineValue}
                 onChange={(e) => setNewBaselineValue(e.target.value)}
             />
@@ -245,7 +245,7 @@ export default function Home() {
             <div>
                 <input className='inputs'
                     type="text"
-                    placeholder="Stock Symbol"
+                    placeholder="Enter Stock Symbol"
                     value={newStock.symbol}
                     onChange={(e) => setNewStock({ ...newStock, symbol: e.target.value.toUpperCase() })}
                     disabled={isEditing}
@@ -253,7 +253,7 @@ export default function Home() {
                 <input
                     className="inputs"
                     type="number"
-                    placeholder="Shares Held"
+                    placeholder="Number of Shares Held?"
                     value={newStock.sharesHeld}
                     onChange={(e) => setNewStock({ ...newStock, sharesHeld: Number(e.target.value) })}
                     onFocus={(e) => {
