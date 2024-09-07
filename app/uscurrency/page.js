@@ -303,7 +303,7 @@ export default function Home() {
             {/* Display the fetched DJI value */}
             <div>
                 <h2 className="ftse-index" style={{ marginBottom: '20px', color:'grey', fontSize:'0.9rem' }}>
-                    DJ Index: {djiValue !== null ? djiValue : 'Loading...'}</h2>
+                    DJ Index: {djiValue !== null ? djiValue.toLocaleString('en-GB') : 'Loading...'}</h2>
             </div>
 
             {/* Stock Table */}
