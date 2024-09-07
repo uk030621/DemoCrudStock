@@ -75,6 +75,8 @@ body{
 
 .statistics{
   color:grey;
+  margin-top: 0;
+  font-size: 0.8rem;
 }
 
 button{
@@ -91,7 +93,7 @@ button{
   border-radius: 7px;
   cursor: pointer;
   border: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   padding: 8px;
   margin-right: 10px;
 }
@@ -109,6 +111,7 @@ button:hover{
 
 .sub-heading{
   color: black;
+  font-size: 1.2rem;
 }
 
 .table-heading{
@@ -173,6 +176,8 @@ button:hover{
 
 .baseline-value{
   color: gray;
+  margin-bottom: 2px;
+  font-size: 0.9rem;
 }
 
 .usstock-link{
@@ -228,4 +233,9 @@ button:hover{
 .stock-label{
   font-size: 1.6rem;
   margin-top: 0;
+}
+
+.submit-baseline-button{
+  padding: 7px;
+  margin-left: 4px;
 }

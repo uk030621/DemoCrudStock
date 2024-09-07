@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '../../../lib/mongodb';
 
+const COLLECTION_BASELINE_NAME = 'demosettings'; // Change this to connenct with appropriate baseline MongoDB collection.
+const COLLECTION_STOCK_NAME = 'demostocks'; // Change this to connenct with appropriate Stock MongoDB collection.
+
+
+
 // Helper function to connect to the database
 async function connectToDatabase() {
     const client = await clientPromise;
@@ -10,7 +15,7 @@ async function connectToDatabase() {
 // Function to get the baseline portfolio value
 export async function getBaselinePortfolioValue() {
     const db = await connectToDatabase();
-    const settings = await db.collection('demosettings').findOne({});
+    const settings = await db.collection(COLLECTION_BASELINE_NAME).findOne({});
 
     const baselinePortfolioValue = settings?.baselinePortfolioValue || 100000; // Fallback to 100000 if not set
 
@@ -48,7 +53,7 @@ export async function GET(req) {
             
             
             
-            const stock = await db.collection('demostocks').findOne({ symbol });
+            const stock = await db.collection(COLLECTION_STOCK_NAME).findOne({ symbol });
 
             if (!stock) {
                 return NextResponse.json({ error: `No stock found with symbol: ${symbol}` }, { status: 404 });
@@ -71,7 +76,7 @@ export async function GET(req) {
                     //console.log(`[A] Calculated pricePerShare for ${symbol}:`, stock.pricePerShare);
                     //console.log(`{A] Calculated totalValue for ${symbol}:`, stock.totalValue);
 
-                    await db.collection('demostocks').updateOne({ symbol }, { $set: { pricePerShare: stock.pricePerShare, totalValue: stock.totalValue } });
+                    await db.collection(COLLECTION_STOCK_NAME).updateOne({ symbol }, { $set: { pricePerShare: stock.pricePerShare, totalValue: stock.totalValue } });
                 } else {
                     return NextResponse.json({ error: `Failed to fetch stock price for symbol: ${symbol}` }, { status: 500 });
                 }
@@ -79,7 +84,7 @@ export async function GET(req) {
 
             return NextResponse.json(stock);
         } else {
-            const stocks = await db.collection('demostocks').find({}).toArray();
+            const stocks = await db.collection(COLLECTION_STOCK_NAME).find({}).toArray();
 
             const updatedStocks = await Promise.all(stocks.map(async (stock) => {
                 if (stock.pricePerShare || stock.totalValue) {
@@ -99,7 +104,7 @@ export async function GET(req) {
                         //console.log(`[C] Calculated pricePerShare for ${stock.symbol}:`, stock.pricePerShare);
                         //console.log(`[C] Calculated totalValue for ${stock.symbol}:`, stock.totalValue);
 
-                        await db.collection('demostocks').updateOne({ symbol: stock.symbol }, { $set: { pricePerShare: stock.pricePerShare, totalValue: stock.totalValue } });
+                        await db.collection(COLLECTION_STOCK_NAME).updateOne({ symbol: stock.symbol }, { $set: { pricePerShare: stock.pricePerShare, totalValue: stock.totalValue } });
                     }
                 }
                 return stock;
@@ -138,7 +143,7 @@ export async function POST(req) {
         //console.log(`[E] Calculated pricePerShare for ${newStock.symbol}:`, newStock.pricePerShare);
         //console.log(`[E] Calculated totalValue for ${newStock.symbol}:`, newStock.totalValue);
 
-        const result = await db.collection('demostocks').insertOne(newStock);
+        const result = await db.collection(COLLECTION_STOCK_NAME).insertOne(newStock);
         const addedStock = { _id: result.insertedId, ...newStock };
 
         return NextResponse.json(addedStock, { status: 201 });
@@ -155,7 +160,7 @@ export async function PUT(req) {
         const updatedStock = await req.json();
         const { symbol, ...updateData } = updatedStock;
 
-        const result = await db.collection('demostocks').updateOne(
+        const result = await db.collection(COLLECTION_STOCK_NAME).updateOne(
             { symbol },
             { $set: updateData }
         );
@@ -177,7 +182,7 @@ export async function DELETE(req) {
         const db = await connectToDatabase();
         const { symbol } = await req.json();
 
-        const result = await db.collection('demostocks').deleteOne({ symbol });
+        const result = await db.collection(COLLECTION_STOCK_NAME).deleteOne({ symbol });
 
         if (result.deletedCount === 0) {
             return NextResponse.json({ error: `No stock found with symbol: ${symbol}` }, { status: 404 });

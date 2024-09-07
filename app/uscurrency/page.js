@@ -223,9 +223,6 @@ export default function Home() {
             </h2>
         )}
 
-
-            <button className='input-stock-button' onClick={updateBaselineValue}>Submit a baseline</button>
-
            {/*<button className='input-stock-button' onClick={handleClose}>Exit</button>*/}
             
             <h1 className='heading'>
@@ -250,7 +247,7 @@ export default function Home() {
                 value={newBaselineValue}
                 onChange={(e) => setNewBaselineValue(e.target.value)}
             />
-            
+            <button className='submit-baseline-button' onClick={updateBaselineValue}>Submit</button>
             
             <h4 className="statistics">
                  £ Deviation:  <span className={getColorClass(deviation.absoluteDeviation)}>
