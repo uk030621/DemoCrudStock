@@ -52,7 +52,7 @@ export default function Home() {
 
     const fetchBaselineValue = async () => {
         try {
-            const response = await fetch('/api/settings');
+            const response = await fetch('/api/ukbaseline');
             const data = await response.json();
             setBaselinePortfolioValue(data.baselinePortfolioValue);
         } catch (error) {
@@ -62,7 +62,7 @@ export default function Home() {
 
     const updateBaselineValue = async () => {
         try {
-            const response = await fetch('/api/settings', {
+            const response = await fetch('/api/ukbaseline', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ baselinePortfolioValue: parseFloat(newBaselineValue) })
@@ -289,7 +289,7 @@ export default function Home() {
                     setIsEditing(false);
                     setNewStock({ symbol: '', sharesHeld: 0 });
                 }}>Cancel</button>}
-                <button className='input-stock-button' onClick={fetchData}>Refresh Data</button>
+                <button className='input-stock-button' onClick={fetchData}>Refresh</button>
             </div>
 
             {/* FTSE Index Display */}

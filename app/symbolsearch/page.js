@@ -42,88 +42,91 @@ export default function StockSearchPage() {
 
 
   return (
-    <div style={{ padding: '5px' }}>
-
-      <Image className='uk-pic'
-                    src="/search.jpg" 
-                    alt="Portfolio Image" 
-                    width={290}  // Adjust the width
-                    height={260} // Adjust the height
-                    style={{ marginLeft: '5px' }}  // Add margin for spacing
-                />
-
-      <h1 className='stock-label'>Stock Symbol Lookup</h1>
-      <input
-        type="text"
-        placeholder="Enter stock name or symbol"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ width: '300px', padding: '10px', marginBottom: '10px' }}
-      />
-      <ul style={{ border: '1px solid #ccc', width: '300px' }}>
-        {suggestions.map((stock) => (
-          <li
-            key={stock.symbol}
-            onClick={() => handleSelectStock(stock.symbol)}
-            style={{ padding: '5px', cursor: 'pointer' }}
-          >
-            {stock.name} ({stock.symbol})
-          </li>
-        ))}
-      </ul>
-
-      {/* Display the selected stock in an additional input box */}
-      <div style={{ marginTop: '20px' }}>
-        <label>Selected Stock Symbol:</label>
-            {/*<div>
-            <input
-            type="text"
-            value={selectedStock} // This input gets updated automatically
-            readOnly
-            style={{ width: '300px', padding: '10px', marginTop: '10px', backgroundColor: '#f0f0f0' }}
-            />
-            </div>*/}
-      </div>
-
-      <div>
-      <input 
-        className='selected-symbol'
-        ref={inputRef}
-        type="text"
-        defaultValue={selectedStock}
-        readOnly
-        style={{ marginRight: '10px', marginTop: '10px', padding:'8px' }}
-      />
-      <button 
-      onClick={handleCopy} 
-      style={{padding: '8px'}}
-      >Copy</button>
-      {copySuccess && <span style={{ marginLeft: '10px' }}>{copySuccess}</span>}
-    </div>
-        <div style={{display:'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
-            <p className='return-to-stock'>Return to Stock: </p>
-            <Link className='stock-symbol-search' href="/">
-            <span>
-            <Image className='uk-pic'
-                    src="/UKFlag.jpg" 
-                    alt="Portfolio Image" 
-                    width={50}  // Adjust the width
-                    height={50} // Adjust the height
-                    style={{ marginLeft: '5px' }}  // Add margin for spacing
-                />
-            </span>UK</Link>
-            <Link className='stock-symbol-search' href="/uscurrency">
-            <span>
-            <Image className='uk-pic'
-                    src="/USFLAG.jpg" 
-                    alt="Portfolio Image" 
-                    width={50}  // Adjust the width
-                    height={50} // Adjust the height
-                    style={{ marginLeft: '5px' }}  // Add margin for spacing
-                />
-            </span>US</Link>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '15px' }}>
+      
+        <Image
+          className='uk-pic'
+          src="/search.jpg"
+          alt="Portfolio Image"
+          width={290} // Adjust the width
+          height={260} // Adjust the height
+          style={{ marginLeft: '5px' }} // Add margin for spacing
+        />
+  
+        <h1 className='stock-label'>Stock Symbol Lookup</h1>
+  
+        <input
+          type="text"
+          placeholder="Enter stock name or symbol"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{ width: '300px', padding: '10px', marginBottom: '10px' }}
+        />
+  
+        <ul style={{ border: '1px solid #ccc', width: '300px', padding: '0', listStyleType: 'none' }}>
+          {suggestions.map((stock) => (
+            <li
+              key={stock.symbol}
+              onClick={() => handleSelectStock(stock.symbol)}
+              style={{ padding: '5px', cursor: 'pointer', textAlign: 'left' }} // Align items left
+            >
+              {stock.name} ({stock.symbol})
+            </li>
+          ))}
+        </ul>
+  
+        {/* Display the selected stock in an additional input box */}
+        <div style={{ marginTop: '20px' }}>
+          <label>Selected Stock Symbol:</label>
         </div>
+  
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <input
+            className='selected-symbol'
+            ref={inputRef}
+            type="text"
+            defaultValue={selectedStock}
+            readOnly
+            style={{ marginRight: '10px', marginTop: '10px', padding: '8px', width: '300px' }}
+          />
+          <button onClick={handleCopy} style={{ padding: '8px' }}>
+            Copy
+          </button>
+          {copySuccess && <span style={{ marginLeft: '10px' }}>{copySuccess}</span>}
+        </div>
+  
+        <div style={{ marginTop: '20px', textAlign: 'center' }}>
+          <p className='return-to-stock'>Return to Stock: </p>
+          <Link className='stock-symbol-search' href="/">
+            <span>
+              <Image
+                className='uk-pic'
+                src="/UKFlag.jpg"
+                alt="Portfolio Image"
+                width={50} // Adjust the width
+                height={50} // Adjust the height
+                style={{ marginLeft: '5px' }} // Add margin for spacing
+              />
+            </span>
+            UK
+          </Link>
+          <Link className='stock-symbol-search' href="/uscurrency">
+            <span>
+              <Image
+                className='uk-pic'
+                src="/USFLAG.jpg"
+                alt="Portfolio Image"
+                width={50} // Adjust the width
+                height={50} // Adjust the height
+                style={{ marginLeft: '5px' }} // Add margin for spacing
+              />
+            </span>
+            US
+          </Link>
+        </div>
+      
     </div>
   );
+  
 }
 

@@ -24,8 +24,9 @@ export default function Home() {
         fetchFtseValue(); // Fetch FTSE value
     }, []);
 
-    // Function to fetch FTSE index value
-    const fetchFtseValue = async () => {
+
+     // Function to fetch FTSE index value
+     const fetchFtseValue = async () => {
         try {
             const response = await fetch('/api/usstock?symbol=FTSE^');
             const data = await response.json();
@@ -38,9 +39,6 @@ export default function Home() {
     };
 
     // Other existing code...
-
-
-
 
     useEffect(() => {
         const absoluteDeviation = totalPortfolioValue - baselinePortfolioValue;
@@ -216,17 +214,11 @@ export default function Home() {
     return (
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
 
-            {/* FTSE Index Display */}
-        {ftseValue !== null && (
-            <h2 className="ftse-index" style={{ marginBottom: '20px', color:'grey' }}>
-                FTSE 100 Index: <span>{ftseValue.toLocaleString('en-GB')}</span>
-            </h2>
-        )}
-
-           {/*<button className='input-stock-button' onClick={handleClose}>Exit</button>*/}
+        
+            {/*<button className='input-stock-button' onClick={handleClose}>Exit</button>*/}
             
             <h1 className='heading'>
-                US<span>
+                UK<span>
                 <Image className='uk-pic'
                     src="/USFLAG.jpg" 
                     alt="Portfolio Image" 
@@ -237,8 +229,10 @@ export default function Home() {
                 </span> Stock Portfolio  
             </h1>
 
-            <h2 className="sub-heading" style={{ marginTop: '10px' }}>Total Value: <span className='total-value'>£{totalPortfolioValue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</span></h2>
-            <h4 className='baseline-value'>Baseline Value: £{baselinePortfolioValue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</h4>
+
+
+            <h2 className="sub-heading" style={{ marginTop: '10px' }}>Indicative Value: <span className='total-value'>${totalPortfolioValue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</span></h2>
+            <h4 className='baseline-value'>Baseline: ${baselinePortfolioValue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</h4>
             
             <input
                 className="inputs"
@@ -249,22 +243,22 @@ export default function Home() {
             />
             <button className='submit-baseline-button' onClick={updateBaselineValue}>Submit</button>
             
-            <h4 className="statistics">
-                 £ Deviation:  <span className={getColorClass(deviation.absoluteDeviation)}>
-                    {deviation.absoluteDeviation.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                </span>
-            </h4>
-            <h4 className="statistics">
-                % Change:  <span className={getColorClass(deviation.percentageChange)}>
-                    {deviation.percentageChange.toFixed(2)}
-                </span>
-            </h4>
+            <p style={{fontSize:'0.8rem', marginBottom:'2px', color:'grey'}}>Change from baseline:</p>
+                <h4 className="statistics">
+                    <span className={getColorClass(deviation.absoluteDeviation)} style={{ marginRight: '20px' }}>
+                        ${deviation.absoluteDeviation.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    </span>
+
+                    <span className={getColorClass(deviation.percentageChange)}>
+                        {deviation.percentageChange.toFixed(2)}%
+                    </span>
+                </h4>
+        
 
             {/*<a className='hyperlink1' href="https://uk.finance.yahoo.com/lookup" target="_blank" rel="noopener noreferrer" >Link - <span className='symbol-lookup'>symbol lookup</span> </a>*/}
             <Link className='stock-symbol-search' href = "/symbolsearch">Symbol Search</Link>
             <Link className='currency-link' href="/currency">Currency Converter</Link>
             <Link className='usstock-link' href="/">UK Stocks</Link>
-
             {/* Add or Update Stock Form */}
             <div>
                 <input className='inputs'
@@ -295,8 +289,15 @@ export default function Home() {
                     setIsEditing(false);
                     setNewStock({ symbol: '', sharesHeld: 0 });
                 }}>Cancel</button>}
-                <button className='input-stock-button' onClick={fetchData}>Refresh Data</button>
+                <button className='input-stock-button' onClick={fetchData}>Refresh</button>
             </div>
+
+            {/* FTSE Index Display */}
+        {ftseValue !== null && (
+            <h2 className="ftse-index" style={{ marginBottom: '20px', color:'grey', fontSize:'0.9rem' }}>
+                FTSE 100 Index: <span>{ftseValue.toLocaleString('en-GB')}</span>
+            </h2>
+        )}
 
             {/* Stock Table */}
             {isLoading ? (
@@ -306,9 +307,9 @@ export default function Home() {
                     <thead className='table-heading'>
                         <tr>
                             <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Stock Symbol</th>
-                            <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Share price (£)</th>
+                            <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Share price ($)</th>
                             <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Share holding (n)</th>
-                            <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Total value (£)</th>
+                            <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Total value ($)</th>
                             <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Actions</th>
                         </tr>
                     </thead>

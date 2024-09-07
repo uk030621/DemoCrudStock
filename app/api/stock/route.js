@@ -1,32 +1,14 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '../../../lib/mongodb';
 
-const COLLECTION_BASELINE_NAME = 'demosettings'; // Change this to connenct with appropriate baseline MongoDB collection.
+
 const COLLECTION_STOCK_NAME = 'demostocks'; // Change this to connenct with appropriate Stock MongoDB collection.
-
-
 
 // Helper function to connect to the database
 async function connectToDatabase() {
     const client = await clientPromise;
     return client.db('stock_portfolio'); // Replace 'stock_portfolio' with your database name
 }
-
-// Function to get the baseline portfolio value
-export async function getBaselinePortfolioValue() {
-    const db = await connectToDatabase();
-    const settings = await db.collection(COLLECTION_BASELINE_NAME).findOne({});
-
-    const baselinePortfolioValue = settings?.baselinePortfolioValue || 100000; // Fallback to 100000 if not set
-
-    // Use console.log to verify if the baselinePortfolioValue is retrieved
-    console.log('Retrieved baselinePortfolioValue:', baselinePortfolioValue);
-
-    return baselinePortfolioValue;
-}
-
-getBaselinePortfolioValue();
-
 
 
 // GET - Fetch stock price from Yahoo Finance API or from database

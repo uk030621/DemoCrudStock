@@ -27,8 +27,8 @@ export default function CurrencyConverter() {
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '15px' }}>
-      <Link className="home-link" href = "/">Home</Link>
+    <div style={{ textAlign: 'center', marginTop: '50px'}}>
+      <Link className="home-link" href = "/">Home page</Link>
       
       <h1 className='currency-converter-heading'>convert
         <span>
@@ -73,6 +73,9 @@ export default function CurrencyConverter() {
       {result && (
         <h2 className='result'>{amount} {fromCurrency} = {result} {toCurrency}</h2>
       )}
+
+<Link className="home-link" href = "/">Home page</Link>
     </div>
+    
   );
 }
