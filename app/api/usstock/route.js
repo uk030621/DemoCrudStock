@@ -19,16 +19,16 @@ export async function GET(req) {
         const db = await connectToDatabase();
 
         if (symbol) {
-            // Special handling for FTSE^ index
-            if (symbol === 'FTSE^') {
-                const response = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/%5EFTSE`);
+            // Special handling for DJI^ index (Dow Jones Industrial Average)
+            if (symbol === 'DJI^') {
+                const response = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI`);
                 const data = await response.json();
-                const ftseValue = data.chart.result[0].meta.regularMarketPrice;
+                const djiValue = data.chart.result[0].meta.regularMarketPrice;
 
-                if (ftseValue !== undefined) {
-                    return NextResponse.json({ symbol: 'FTSE^', pricePerShare: ftseValue });
+                if (djiValue !== undefined) {
+                    return NextResponse.json({ symbol: 'DJI^', pricePerShare: djiValue });
                 } else {
-                    return NextResponse.json({ error: 'Failed to fetch FTSE index value' }, { status: 500 });
+                    return NextResponse.json({ error: 'Failed to fetch DJI index value' }, { status: 500 });
                 }
             }
             

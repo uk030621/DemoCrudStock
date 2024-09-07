@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function Home() {
     const [stocks, setStocks] = useState([]);
     const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
-    const [ftseValue, setFtseValue] = useState(null); // Initialize ftseValue using useState
+    const [djiValue, setDjiValue] = useState(null); // Initialize djiValue using useState
     const [newStock, setNewStock] = useState({ symbol: '', sharesHeld: 0 });
     const [isEditing, setIsEditing] = useState(false);
     const [editingSymbol, setEditingSymbol] = useState('');
@@ -21,20 +21,20 @@ export default function Home() {
     useEffect(() => {
         fetchData();
         fetchBaselineValue();
-        fetchFtseValue(); // Fetch FTSE value
+        fetchDjiValue(); // Fetch DJI value
     }, []);
 
 
-     // Function to fetch FTSE index value
-     const fetchFtseValue = async () => {
+     // Function to fetch DJI index value
+    const fetchDjiValue = async () => {
         try {
-            const response = await fetch('/api/usstock?symbol=FTSE^');
+            const response = await fetch('/api/usstock?symbol=DJI^'); // Call backend with DJI^ symbol
             const data = await response.json();
             if (data.pricePerShare) {
-                setFtseValue(data.pricePerShare);
+                setDjiValue(data.pricePerShare); // Update state with the fetched DJI value
             }
         } catch (error) {
-            console.error('Error fetching FTSE index:', error);
+            console.error('Error fetching DJI index:', error);
         }
     };
 
@@ -293,11 +293,18 @@ export default function Home() {
             </div>
 
             {/* FTSE Index Display */}
-        {ftseValue !== null && (
+        {/*{ftseValue !== null && (
             <h2 className="ftse-index" style={{ marginBottom: '20px', color:'grey', fontSize:'0.9rem' }}>
                 FTSE 100 Index: <span>{ftseValue.toLocaleString('en-GB')}</span>
             </h2>
-        )}
+        )}*/}
+
+
+            {/* Display the fetched DJI value */}
+            <div>
+                <h2 className="ftse-index" style={{ marginBottom: '20px', color:'grey', fontSize:'0.9rem' }}>
+                    DJ Index: {djiValue !== null ? djiValue : 'Loading...'}</h2>
+            </div>
 
             {/* Stock Table */}
             {isLoading ? (
