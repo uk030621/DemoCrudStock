@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '../../../lib/mongodb';
 
+// This route.js accesses the DATABASE 'stock_portfolio' from the MongoDB database.
+const MONGODB_DB_NAME = 'stock_portfolio';
+
+// This route.js accesses the COLLECTION 'demosettings' from the MongoDB database.
 const COLLECTION_BASELINE_NAME = 'demosettings'; // Change this to connenct with appropriate baseline MongoDB collection.
 
 async function connectToDatabase() {
     const client = await clientPromise;
-    return client.db('stock_portfolio'); // Replace with your database name
+    return client.db(MONGODB_DB_NAME); // Replace with your database name
 }
 
 export async function GET(req) {

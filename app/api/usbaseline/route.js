@@ -1,15 +1,22 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '../../../lib/mongodb';
 
+// This route.js accesses the DATABASE 'stock_portfolio' from the MongoDB database.
+const MONGODB_DB_NAME = 'stock_portfolio';
+
+// This route.js accesses the COLLECTION 'demoUSsettings' from the MongoDB database.
+const COLLECTION_BASELINE_NAME = 'demoUSsettings'; // Change this to connenct with appropriate baseline MongoDB collection.
+
+
 async function connectToDatabase() {
     const client = await clientPromise;
-    return client.db('stock_portfolio'); // Replace with your database name
+    return client.db(MONGODB_DB_NAME); // Replace with your database name
 }
 
 export async function GET(req) {
     try {
         const db = await connectToDatabase();
-        const settings = await db.collection('demoUSsettings').findOne({});
+        const settings = await db.collection(COLLECTION_BASELINE_NAME).findOne({});
         
         return NextResponse.json({ baselinePortfolioValue: settings?.baselinePortfolioValue || 100000 });
     } catch (error) {
@@ -23,7 +30,7 @@ export async function POST(req) {
         const db = await connectToDatabase();
         const { baselinePortfolioValue } = await req.json();
 
-        const result = await db.collection('demoUSsettings').updateOne(
+        const result = await db.collection(COLLECTION_BASELINE_NAME).updateOne(
             {},
             { $set: { baselinePortfolioValue } },
             { upsert: true }
