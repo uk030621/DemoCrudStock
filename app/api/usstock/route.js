@@ -1,13 +1,17 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '../../../lib/mongodb';
 
+// This route.js accesses the DATABASE 'stock_portfolio' from the MongoDB database.
+const MONGODB_DB_NAME = 'stock_portfolio';
+
+// This route.js accesses the COLLECTION 'usstocks' from the MongoDB database.
 const COLLECTION_USSTOCK_NAME = 'usstocks'; // Change this to connenct with appropriate Stock MongoDB collection.
 
 
 // Helper function to connect to the database
 async function connectToDatabase() {
     const client = await clientPromise;
-    return client.db('stock_portfolio'); // Replace 'stock_portfolio' with your database name
+    return client.db(MONGODB_DB_NAME); // Replace 'stock_portfolio' with your database name
 }
 
 // GET - Fetch stock price from Yahoo Finance API or from database
