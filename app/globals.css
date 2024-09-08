@@ -138,6 +138,7 @@ button:hover{
 }
 
 .inputs {
+  font-size: 17px;
   border: 1px solid #ccc; /* Set a consistent border color */
   border-radius: 4px; /* Optional: Adds rounded corners */
   padding: 8px; /* Add some padding for better appearance */
