@@ -218,7 +218,7 @@ export default function Home() {
             {/*<button className='input-stock-button' onClick={handleClose}>Exit</button>*/}
             
             <h1 className='heading'>
-                UK<span>
+                US<span>
                 <Image className='uk-pic'
                     src="/USFLAG.jpg" 
                     alt="Portfolio Image" 
